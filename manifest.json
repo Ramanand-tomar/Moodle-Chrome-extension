@@ -1,0 +1,35 @@
+{
+    "name": "MITS Moodle Auto Login",
+    "version": "2.0",
+    "manifest_version": 3,
+    "permissions": [
+        "storage",
+        "activeTab"
+    ],
+    
+    "content_scripts": [
+        {
+            "matches": [
+                "http://moodle.mitsgwalior.in/*",
+                "https://moodle.mitsgwalior.in/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Moodle Auto Login"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "icons": {
+        "16": "image.jpg",
+        "32": "image.jpg",
+        "48": "image.jpg",
+        "128": "image.jpg"
+    }
+}
