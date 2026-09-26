@@ -1,0 +1,8 @@
+# Sensitive keys and credentials
+key.txt
+*.key
+.env
+
+# OS / System files
+.DS_Store
+Thumbs.db

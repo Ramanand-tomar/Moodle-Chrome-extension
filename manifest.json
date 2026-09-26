@@ -6,7 +6,9 @@
         "storage",
         "activeTab"
     ],
-    
+    "host_permissions": [
+        "https://generativelanguage.googleapis.com/*"
+    ],
     "content_scripts": [
         {
             "matches": [

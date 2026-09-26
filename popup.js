@@ -58,4 +58,42 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
   };
+
+  // Gemini API key: load existing
+  chrome.storage.sync.get(['geminiApiKey'], (data) => {
+    updateKeyStatus(data.geminiApiKey);
+  });
+
+  // Gemini API key: save handler
+  document.getElementById('saveKey').onclick = function () {
+    const key = document.getElementById('geminiKey').value.trim();
+    if (!key) {
+      alert('Please paste your Gemini API key.');
+      return;
+    }
+    const btn = document.getElementById('saveKey');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span>Saving...</span>';
+    btn.disabled = true;
+
+    chrome.storage.sync.set({ geminiApiKey: key }, () => {
+      document.getElementById('geminiKey').value = '';
+      updateKeyStatus(key);
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+    });
+  };
 });
+
+function updateKeyStatus(key) {
+  const el = document.getElementById('keyStatus');
+  if (!el) return;
+  if (key) {
+    const masked = '••••••••' + key.slice(-4);
+    el.textContent = 'Key saved ✓ (' + masked + ')';
+    el.className = 'key-status saved';
+  } else {
+    el.textContent = 'No key set';
+    el.className = 'key-status missing';
+  }
+}
